@@ -16,7 +16,7 @@
     "skipChecks": true
   },
   "hooks": {
-    "before:init": ["bun test"],
+    "before:init": ["bun run test:setup", "bun run test"],
     "before:release": ["bun run build"]
   },
   "plugins": {
