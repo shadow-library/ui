@@ -60,8 +60,9 @@ async function build() {
   await bundle.close();
 
   /** Generating type declarations */
-  const tsc = Bun.spawnSync(['bun', 'tsc', '--project', 'tsconfig.build.json'], { cwd: rootDir, stdio: ['inherit', 'inherit', 'inherit'] });
-  if (tsc.exitCode !== 0) error('TypeScript declaration generation failed');
+  let result = Bun.spawnSync(['bun', 'tsc', '-p', 'tsconfig.build.json'], { cwd: rootDir, stdio: ['inherit', 'inherit', 'inherit'] });
+  if (result.exitCode === 0) result = Bun.spawnSync(['bunx', 'tsc-alias', '-p', 'tsconfig.build.json'], { cwd: rootDir, stdio: ['inherit', 'inherit', 'inherit'] });
+  if (result.exitCode !== 0) error('TypeScript declaration generation failed');
 
   /** CSS post-processing */
   const stylesContent = fs.readFileSync(path.join(distDir, 'styles.css'), 'utf-8');

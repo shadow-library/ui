@@ -2,8 +2,10 @@
   "name": "@shadow-library/ui",
   "version": "0.1.1",
   "type": "module",
-  "sideEffects": ["**/*.css"],
-  "description": " Shared React component library for the Shadow Apps ecosystem, built on Mantine with Storybook stories, and full TypeScript support",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "description": "Shared React component library for the Shadow Apps ecosystem, built on Mantine with Storybook stories, and full TypeScript support",
   "scripts": {
     "build": "bun scripts/build.ts",
     "storybook": "storybook dev -p 4000",
@@ -64,6 +66,7 @@
     "rollup-plugin-esbuild": "^6.2.1",
     "rollup-plugin-postcss": "^4.0.2",
     "storybook": "^10.3.1",
+    "tsc-alias": "^1.8.16",
     "vitest": "^4.1.0"
   },
   "peerDependencies": {
