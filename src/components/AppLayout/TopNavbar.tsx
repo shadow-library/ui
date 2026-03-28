@@ -70,7 +70,7 @@ export function TopNavbar({ navItems, headerContent, user, notifications, showTh
         {user && (
           <Menu position='bottom-end' offset={8} width={200}>
             <Menu.Target>
-              <ActionIcon variant='transparent' size='lg' radius='xl'>
+              <ActionIcon variant='transparent' size='lg' radius='xl' aria-label='User menu'>
                 <Avatar src={user.avatarUrl} size='sm' radius='xl' color='initials'>
                   {!user.avatarUrl && getInitials(user.name)}
                 </Avatar>
