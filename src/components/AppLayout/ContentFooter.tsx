@@ -2,6 +2,7 @@
  * Importing npm packages
  */
 import { Box } from '@mantine/core';
+import { type ReactNode } from 'react';
 
 /**
  * Importing user defined packages
@@ -13,7 +14,7 @@ import styles from './AppLayout.module.css';
  */
 
 interface ContentFooterProps {
-  content: React.ReactNode;
+  content: ReactNode;
 }
 
 /**

@@ -25,7 +25,7 @@ interface AppLayoutProps {
   headerContent?: ReactNode;
   user?: UserInfo;
   notifications?: NotificationsConfig;
-  footer?: React.ReactNode;
+  footer?: ReactNode;
   showThemeToggle?: boolean;
   defaultCollapsed?: boolean;
 }

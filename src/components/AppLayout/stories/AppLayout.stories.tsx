@@ -3,7 +3,6 @@
  */
 import { expect, waitFor } from 'storybook/test';
 
-import { D, E, M, O } from '@/components/Logo';
 import { preview } from '$storybook/preview';
 
 /**
@@ -31,7 +30,6 @@ const meta = preview.meta({
   decorators: [withRouter('/')],
   args: {
     appName: 'Demo',
-    productName: [D, E, M, O],
     navItems: sampleNavItems,
     user: sampleUser,
     notifications: sampleNotifications,
