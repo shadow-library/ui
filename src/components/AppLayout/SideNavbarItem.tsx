@@ -7,6 +7,8 @@ import { Link } from '@tanstack/react-router';
 /**
  * Importing user defined packages
  */
+import { type VoidFn } from '@/types';
+
 import styles from './AppLayout.module.css';
 import { useSideNavbarItem } from './hooks/use-side-navbar-item';
 import { type NavItem } from './layout.types';
@@ -19,7 +21,7 @@ interface SideNavbarItemProps {
   item: NavItem;
   collapsed: boolean;
   isChild?: boolean;
-  onNavigate?: () => void;
+  onNavigate?: VoidFn;
 }
 
 /**
@@ -27,7 +29,8 @@ interface SideNavbarItemProps {
  */
 
 export function SideNavbarItem({ item, collapsed, isChild, onNavigate }: SideNavbarItemProps) {
-  const { isActive, hasChildren, hasActiveChild } = useSideNavbarItem(item);
+  const { isActive, hasChildren, hasActiveChild, onClick } = useSideNavbarItem(item, onNavigate);
+  const routeProps = item.path ? { component: Link, to: item.path } : {};
 
   /** Collapsed mode — icon only */
   if (collapsed) {
@@ -38,10 +41,11 @@ export function SideNavbarItem({ item, collapsed, isChild, onNavigate }: SideNav
             <ActionIcon
               variant={hasActiveChild ? 'light' : 'subtle'}
               size='xl'
-              onClick={item.onClick}
+              onClick={onClick}
               disabled={item.disabled}
               className={styles.collapsedItem}
               aria-label={item.label}
+              {...routeProps}
             >
               <item.icon size={20} />
             </ActionIcon>
@@ -53,7 +57,7 @@ export function SideNavbarItem({ item, collapsed, isChild, onNavigate }: SideNav
                 key={child.key ?? child.path ?? child.label}
                 leftSection={<child.icon size={16} />}
                 disabled={child.disabled}
-                onClick={child.onClick}
+                onClick={onClick}
                 {...(child.path ? { component: Link, to: child.path } : {})}
               >
                 {child.label}
@@ -66,7 +70,15 @@ export function SideNavbarItem({ item, collapsed, isChild, onNavigate }: SideNav
 
     return (
       <Tooltip label={item.label} position='right' offset={8}>
-        <ActionIcon variant={isActive ? 'light' : 'subtle'} size='xl' onClick={item.onClick} disabled={item.disabled} className={styles.collapsedItem} aria-label={item.label}>
+        <ActionIcon
+          variant={isActive ? 'light' : 'subtle'}
+          size='xl'
+          onClick={onClick}
+          disabled={item.disabled}
+          className={styles.collapsedItem}
+          aria-label={item.label}
+          {...routeProps}
+        >
           <item.icon size={20} />
         </ActionIcon>
       </Tooltip>
@@ -80,10 +92,10 @@ export function SideNavbarItem({ item, collapsed, isChild, onNavigate }: SideNav
       leftSection={<item.icon size={18} />}
       active={isActive || hasActiveChild}
       disabled={item.disabled}
-      onClick={hasChildren ? undefined : item.onClick}
+      onClick={hasChildren ? undefined : onClick}
       defaultOpened={hasActiveChild}
       className={isChild ? styles.childNavLink : undefined}
-      {...(item.path ? { component: Link, to: item.path } : {})}
+      {...routeProps}
     >
       {hasChildren && item.children?.map(child => <SideNavbarItem key={child.key ?? child.path ?? child.label} item={child} collapsed={false} isChild onNavigate={onNavigate} />)}
     </NavLink>

@@ -14,7 +14,7 @@
     "test:setup": "bunx playwright install",
     "test": "vitest run",
     "lint": "biome check",
-    "format": "biome format",
+    "format": "biome format --write",
     "prepare": "husky"
   },
   "repository": {
