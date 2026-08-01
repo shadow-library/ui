@@ -1,3 +1,6 @@
+> **Archived — migrated to the [platform monorepo](https://github.com/shadow-library/platform).**
+> This code now lives at [`packages/ui`](https://github.com/shadow-library/platform/tree/main/packages/ui) with its full history; this repository is read-only.
+
 # @shadow-library/ui
 
 Shared UI components, layout primitives, and utilities for all Shadow Library apps.
